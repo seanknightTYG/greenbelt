@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenbelt Electrical — Licensed Electricians in Humboldt County</title>
+<meta name="description" content="Greenbelt Electrical is a licensed C-10 contractor serving Humboldt County since 2015. Panel upgrades, EV chargers, and whole-home rewiring done right.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     GREENBELT ELECTRICAL — built to brand guidelines
+     Colors, type scale, contrast pairings per the handoff spec.
+     ============================================================ */
+  :root{
+    --green:#5CB63B;      /* Greenbelt Green — accents, icons, checks */
+    --yellow:#F2C829;     /* Voltage Yellow — primary CTA only */
+    --black:#111111;      /* Panel Black — ground */
+    --forest:#1E4D2B;     /* Deep Forest — headers, buttons, hero */
+    --forest-deep:#163920;
+    --gray:#3C3C3C;       /* Conduit Gray — secondary text */
+    --charcoal:#1A1A1A;   /* Charcoal — body text */
+    --surface:#FAFAF8;    /* Off-White — page background */
+    --line:#E4E4DF;
+    --line-strong:#D2D2CB;
+    --green-tint:#EEF7E9;
+    --forest-tint:#E8F0EA;
+
+    --maxw:1180px;
+    --r:14px;
+    --r-sm:10px;
+    --shadow:0 1px 2px rgba(17,17,17,.05), 0 8px 28px rgba(17,17,17,.07);
+    --shadow-lg:0 24px 60px rgba(17,17,17,.16);
+    --ff:'Source Sans 3', system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--ff);color:var(--charcoal);
+    background:var(--surface);line-height:1.62;font-size:19px;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{line-height:1.12;margin:0;color:var(--charcoal);letter-spacing:-.01em;font-weight:800}
+  p{margin:0}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* Visible focus for keyboard users — never outline:none */
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+    outline:3px solid var(--forest);outline-offset:2px;border-radius:4px;
+  }
+  .dark a:focus-visible,.dark button:focus-visible{outline-color:var(--yellow)}
+
+  .skip{
+    position:absolute;left:16px;top:-60px;background:var(--yellow);color:var(--charcoal);
+    padding:12px 20px;border-radius:10px;font-weight:700;z-index:200;transition:top .15s;text-decoration:none;white-space:nowrap;
+  }
+  .skip:focus{top:16px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--forest);
+  }
+  .dark .eyebrow{color:var(--green)}
+  .eyebrow::before{content:"";width:26px;height:2px;background:currentColor;display:inline-block}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:54px;padding:0 28px;border-radius:11px;font-family:var(--ff);
+    font-weight:700;font-size:18px;text-decoration:none;cursor:pointer;border:2px solid transparent;
+    transition:transform .12s ease, box-shadow .12s ease, background .12s ease;white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--yellow);color:var(--charcoal);box-shadow:0 6px 18px rgba(242,200,41,.4)}
+  .btn-primary:hover{background:#ffd83a;box-shadow:0 10px 26px rgba(242,200,41,.5)}
+  .btn-secondary{background:var(--forest);color:#fff}
+  .btn-secondary:hover{background:var(--forest-deep)}
+  .btn-ghost{background:transparent;color:var(--forest);border-color:var(--forest)}
+  .btn-ghost:hover{background:var(--forest-tint)}
+  .dark .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
+  .dark .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  header.site{
+    position:sticky;top:0;z-index:100;background:var(--black);
+    border-bottom:3px solid var(--forest);
+  }
+  .topbar{
+    background:var(--forest-deep);color:#fff;font-size:14px;
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:42px;flex-wrap:wrap}
+  .topbar span{display:inline-flex;align-items:center;gap:8px;color:#E9F1EA;white-space:nowrap}
+  .topbar .badge-mini{color:var(--yellow);font-weight:700}
+  .topbar .tb-right{display:flex;gap:22px}
+  @media(max-width:760px){.topbar .tb-right{display:none}}
+
+  .navbar .wrap{display:flex;align-items:center;gap:24px;min-height:78px}
+  /* Logo lockup — placeholder for supplied master badge */
+  .logo{display:inline-flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto}
+  .logo .mark{
+    width:52px;height:52px;border-radius:12px;background:linear-gradient(150deg,#234f30,#143620);
+    border:2px solid var(--green);display:grid;place-items:center;flex:none;position:relative;
+  }
+  .logo .mark svg{width:26px;height:26px}
+  .logo .wordmark{display:flex;flex-direction:column;line-height:1}
+  .logo .wordmark b{color:#fff;font-weight:800;font-size:21px;letter-spacing:.02em}
+  .logo .wordmark small{color:var(--green);font-weight:700;font-size:11.5px;letter-spacing:.34em;margin-top:4px}
+
+  nav.main{display:flex;align-items:center;gap:6px}
+  nav.main a{
+    text-decoration:none;color:#EDEDEA;font-weight:600;font-size:16.5px;padding:10px 14px;border-radius:8px;
+    transition:background .12s,color .12s;
+  }
+  nav.main a:hover{background:rgba(92,182,59,.16);color:#fff}
+  .nav-actions{display:flex;align-items:center;gap:14px;margin-left:8px}
+  .phone-head{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:800;
+    font-size:19px;padding:9px 8px;
+  }
+  .phone-head svg{width:22px;height:22px;color:var(--green)}
+  .phone-head small{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+  .phone-head .num{line-height:1.05}
+
+  .menu-btn{display:none;background:transparent;border:2px solid rgba(255,255,255,.3);border-radius:9px;
+    width:50px;height:50px;cursor:pointer;color:#fff}
+  .menu-btn svg{width:24px;height:24px;margin:auto}
+
+  @media(max-width:980px){
+    nav.main, .nav-actions .btn{display:none}
+    .menu-btn{display:grid;place-items:center}
+  }
+
+  /* Mobile drawer */
+  .drawer{position:fixed;inset:0;z-index:150;display:none}
+  .drawer.open{display:block}
+  .drawer .scrim{position:absolute;inset:0;background:rgba(17,17,17,.55)}
+  .drawer .panel{
+    position:absolute;top:0;right:0;height:100%;width:min(86vw,360px);background:var(--surface);
+    padding:24px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-lg);overflow:auto;
+  }
+  .drawer .panel a.dlink{padding:16px 14px;text-decoration:none;color:var(--charcoal);font-weight:700;font-size:20px;border-bottom:1px solid var(--line)}
+  .drawer .panel .closer{align-self:flex-end;background:none;border:none;font-size:30px;cursor:pointer;color:var(--gray);width:48px;height:48px}
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{position:relative;background:var(--black);color:#fff;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(1100px 560px at 78% -10%, rgba(30,77,43,.95), transparent 60%),
+               radial-gradient(700px 420px at 8% 110%, rgba(92,182,59,.16), transparent 60%);}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;
+    padding-top:74px;padding-bottom:78px}
+  .hero h1{color:#fff;font-size:clamp(34px,4.4vw,54px);margin:18px 0 0;letter-spacing:-.02em}
+  .hero h1 .hl{color:var(--green)}
+  .hero p.lede{font-size:21px;color:#E7E7E2;margin-top:30px;max-width:34ch}
+  .hero-cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+  .hero-trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .chip{
+    display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:600;font-size:15px;
+    padding:9px 15px;border-radius:999px;
+  }
+  .chip svg{width:17px;height:17px;color:var(--green);flex:none}
+  .chip.lic{background:var(--yellow);color:var(--charcoal);border-color:var(--yellow);font-weight:800}
+  .chip.lic svg{color:var(--charcoal)}
+
+  /* Hero image placeholder */
+  .hero-media{position:relative}
+  .ph{
+    position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line-strong);
+    background:
+      repeating-linear-gradient(135deg,#20221f 0 14px,#191b18 14px 28px);
+    display:grid;place-items:center;color:#9aa39a;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:13px;letter-spacing:.04em;text-align:center;padding:24px;
+  }
+  .hero-media .ph{aspect-ratio:4/3.4;box-shadow:var(--shadow-lg)}
+  .ph .ph-label{background:rgba(17,17,17,.6);border:1px solid rgba(255,255,255,.14);padding:8px 14px;border-radius:8px}
+  .hero-media .float-card{
+    position:absolute;left:-22px;bottom:-22px;background:#fff;color:var(--charcoal);border-radius:14px;
+    padding:16px 18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:14px;max-width:240px;
+  }
+  .hero-media .float-card .stars{color:var(--yellow);font-size:18px;letter-spacing:2px}
+  .hero-media .float-card b{font-size:26px;font-weight:800;line-height:1}
+  .hero-media .float-card small{color:var(--gray);font-weight:600;font-size:13.5px}
+
+  @media(max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;gap:36px;padding-top:48px;padding-bottom:56px}
+    .hero-media{order:-1;max-width:520px}
+  }
+
+  /* ============================================================
+     TRUST STRIP
+     ============================================================ */
+  .truststrip{background:var(--forest);color:#fff}
+  .truststrip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:22px 28px;text-align:center}
+  .truststrip .ti{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px}
+  .truststrip .ti b{font-size:30px;font-weight:800;color:#fff;line-height:1}
+  .truststrip .ti b .u{color:var(--green)}
+  .truststrip .ti span{font-size:14.5px;color:#D8E5DB;font-weight:600;letter-spacing:.01em}
+  .truststrip .ti+.ti{border-left:1px solid rgba(255,255,255,.16)}
+  @media(max-width:760px){
+    .truststrip .wrap{grid-template-columns:repeat(2,1fr);gap:18px 8px}
+    .truststrip .ti:nth-child(odd){border-left:none}
+    .truststrip .ti:nth-child(3),.truststrip .ti:nth-child(4){border-top:1px solid rgba(255,255,255,.16);padding-top:18px}
+  }
+
+  /* ============================================================
+     SECTION SHELL
+     ============================================================ */
+  section.band{padding:88px 0}
+  .sec-head{max-width:720px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(30px,3.6vw,42px);margin:14px 0 0}
+  .sec-head p{font-size:20px;color:var(--gray);margin-top:16px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+  /* Services */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.svc-grid{grid-template-columns:1fr}}
+  .svc{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;
+    box-shadow:var(--shadow);transition:transform .14s, box-shadow .14s, border-color .14s;position:relative;
+  }
+  .svc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--green)}
+  .svc .ico{
+    width:58px;height:58px;border-radius:13px;background:var(--green-tint);display:grid;place-items:center;
+    margin-bottom:20px;border:1px solid #d8 ;
+  }
+  .svc .ico{border:1px solid #DBEFD2}
+  .svc .ico svg{width:30px;height:30px;color:var(--forest)}
+  .svc h3{font-size:23px;margin-bottom:10px}
+  .svc p{color:var(--gray);font-size:17.5px}
+  .svc .more{display:flex;width:fit-content;align-items:center;gap:7px;margin-top:18px;color:var(--forest);font-weight:700;text-decoration:none;font-size:16.5px}
+  .svc .more svg{width:16px;height:16px;transition:transform .14s}
+  .svc:hover .more svg{transform:translateX(4px)}
+  .svc .more{border-bottom:2px solid var(--green);padding-bottom:2px}
+
+  /* Why us / split */
+  .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center}
+  @media(max-width:900px){.split{grid-template-columns:1fr;gap:40px}}
+  .why-list{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+  .why{display:flex;gap:18px;align-items:flex-start}
+  .why .chk{flex:none;width:42px;height:42px;border-radius:11px;background:var(--forest);display:grid;place-items:center}
+  .why .chk svg{width:22px;height:22px;color:var(--green)}
+  .why h3{font-size:20px;margin-bottom:5px}
+  .why p{color:var(--gray);font-size:17px}
+  .why-media .ph{aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#ECECE6 0 14px,#E3E3DC 14px 28px);color:#8a8f86;box-shadow:var(--shadow)}
+  .why-media .ph .ph-label{background:rgba(255,255,255,.8);border-color:var(--line-strong);color:#6b7066}
+
+  /* Reviews */
+  .reviews{background:var(--forest-tint)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+  @media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+  .rev .stars{color:var(--yellow);font-size:19px;letter-spacing:3px}
+  .rev p{font-size:18px;color:var(--charcoal)}
+  .rev .who{display:flex;align-items:center;gap:13px;margin-top:auto;padding-top:8px}
+  .rev .av{width:44px;height:44px;border-radius:50%;background:var(--forest);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+  .rev .who b{display:block;font-size:16.5px}
+  .rev .who small{color:var(--gray);font-size:14px}
+  .gbadge{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line-strong);border-radius:999px;padding:10px 18px;font-weight:700;box-shadow:var(--shadow);font-size:16px}
+  .gbadge .stars{color:var(--yellow);letter-spacing:2px}
+
+  /* Service area */
+  .area{background:var(--black);color:#fff}
+  .area .split{align-items:center}
+  .area h2{color:#fff}
+  .area .sec-head p{color:#CFCFCB}
+  .towns{display:flex;flex-wrap:wrap;gap:11px;margin-top:26px}
+  .towns span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);padding:10px 17px;border-radius:999px;font-weight:600;font-size:16px}
+  .towns span .d{color:var(--green);margin-right:8px}
+  .area-media .ph{aspect-ratio:1/1;background:repeating-linear-gradient(135deg,#1c1e1b 0 16px,#161814 16px 32px);box-shadow:var(--shadow-lg)}
+
+  /* ============================================================
+     ESTIMATE / CONTACT
+     ============================================================ */
+  .contact .split{align-items:stretch;gap:48px}
+  .contact-info{display:flex;flex-direction:column;gap:26px}
+  .ci-row{display:flex;gap:16px;align-items:flex-start}
+  .ci-row .ico{flex:none;width:50px;height:50px;border-radius:12px;background:var(--green-tint);border:1px solid #DBEFD2;display:grid;place-items:center}
+  .ci-row .ico svg{width:24px;height:24px;color:var(--forest)}
+  .ci-row b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);font-weight:700;display:block;margin-bottom:3px}
+  .ci-row a,.ci-row .v{font-size:21px;font-weight:700;color:var(--charcoal);text-decoration:none}
+  .ci-row a:hover{color:var(--forest);text-decoration:underline}
+  .ci-note{background:var(--forest-tint);border:1px solid #cfe0d3;border-radius:12px;padding:18px 20px;display:flex;gap:13px;align-items:center}
+  .ci-note svg{width:26px;height:26px;color:var(--forest);flex:none}
+  .ci-note b{color:var(--forest);font-weight:800}
+
+  form.estimate{background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px;box-shadow:var(--shadow-lg)}
+  form.estimate h3{font-size:25px;margin-bottom:6px}
+  form.estimate .sub{color:var(--gray);font-size:17px;margin-bottom:24px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-weight:700;font-size:16px;margin-bottom:8px;color:var(--charcoal)}
+  .field label .req{color:#B42318}
+  .field input,.field select,.field textarea{
+    width:100%;font-family:var(--ff);font-size:18px;padding:14px 16px;border:2px solid var(--line-strong);
+    border-radius:11px;background:#fff;color:var(--charcoal);min-height:54px;transition:border-color .12s;
+  }
+  .field textarea{min-height:120px;resize:vertical}
+  .field input:hover,.field select:hover,.field textarea:hover{border-color:#b9b9b1}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--forest);outline:none;box-shadow:0 0 0 3px rgba(30,77,43,.16)}
+  .field.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:520px){.field.row2{grid-template-columns:1fr}}
+  .field .err{color:#B42318;font-size:14.5px;font-weight:600;margin-top:6px;display:none}
+  .field.invalid input,.field.invalid select{border-color:#B42318}
+  .field.invalid .err{display:block}
+  form.estimate .btn-primary{width:100%;margin-top:8px}
+  .form-fine{font-size:14px;color:var(--gray);margin-top:14px;text-align:center}
+  .form-success{display:none;text-align:center;padding:30px 10px}
+  .form-success.show{display:block}
+  .form-success .big{width:72px;height:72px;border-radius:50%;background:var(--green-tint);border:2px solid var(--green);display:grid;place-items:center;margin:0 auto 18px}
+  .form-success .big svg{width:38px;height:38px;color:var(--forest)}
+  .form-success h3{font-size:26px}
+  .form-success p{color:var(--gray);font-size:18px;margin-top:8px}
+
+  /* Commercial full-width card */
+  .svc-commercial{
+    margin-top:22px;background:var(--forest);color:#fff;border-radius:var(--r);
+    padding:34px 36px;display:flex;align-items:center;gap:28px;box-shadow:var(--shadow);
+    background-image:radial-gradient(600px 200px at 100% 0%, rgba(92,182,59,.22), transparent 60%);
+  }
+  .svc-commercial .ico{width:64px;height:64px;border-radius:14px;background:rgba(92,182,59,.18);border:1px solid rgba(92,182,59,.5);display:grid;place-items:center;flex:none}
+  .svc-commercial .ico svg{width:32px;height:32px;color:var(--green)}
+  .svc-commercial h3{color:#fff;font-size:24px;margin-bottom:6px}
+  .svc-commercial p{color:#D8E5DB;font-size:18px;max-width:62ch}
+  .svc-commercial .btn{flex:none;margin-left:auto}
+  @media(max-width:760px){.svc-commercial{flex-direction:column;align-items:flex-start;text-align:left}.svc-commercial .btn{margin-left:0}}
+
+  /* About / story */
+  .about{background:var(--surface)}
+  .about .split{align-items:center;gap:60px}
+  .about-media{position:relative}
+  .about-media .ph{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#ECECE6 0 14px,#E3E3DC 14px 28px);color:#8a8f86;box-shadow:var(--shadow)}
+  .about-media .ph .ph-label{background:rgba(255,255,255,.8);border-color:var(--line-strong);color:#6b7066}
+  .about-media .est-tag{position:absolute;right:-16px;top:-16px;background:var(--yellow);color:var(--charcoal);border-radius:14px;padding:14px 20px;box-shadow:var(--shadow-lg);text-align:center;font-weight:800;line-height:1}
+  .about-media .est-tag b{display:block;font-size:30px}
+  .about-media .est-tag small{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .about p.body{font-size:19px;color:var(--gray);margin-top:16px}
+  .about p.body+p.body{margin-top:16px}
+  .sig{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+  .sig .av{width:54px;height:54px;border-radius:50%;background:var(--forest);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;flex:none}
+  .sig b{font-size:18px}.sig small{display:block;color:var(--gray);font-size:15px}
+
+  /* FAQ */
+  .faq{background:#fff;border-top:1px solid var(--line)}
+  .faq-list{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .qa{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);overflow:hidden;transition:border-color .14s,box-shadow .14s}
+  .qa[open]{border-color:var(--green);box-shadow:var(--shadow)}
+  .qa summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;
+    padding:22px 24px;font-weight:700;font-size:20px;color:var(--charcoal);
+  }
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .plus{flex:none;width:30px;height:30px;border-radius:8px;background:var(--forest-tint);color:var(--forest);display:grid;place-items:center;margin-left:auto;transition:transform .18s,background .14s}
+  .qa summary .plus svg{width:18px;height:18px}
+  .qa[open] summary .plus{transform:rotate(45deg);background:var(--green);color:#fff}
+  .qa .ans{padding:0 24px 24px;color:var(--gray);font-size:18px;line-height:1.6}
+
+  /* CTA band */
+  .ctaband{background:var(--forest);color:#fff}
+  .ctaband .wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:54px 28px;flex-wrap:wrap}
+  .ctaband h2{color:#fff;font-size:clamp(28px,3.2vw,38px);max-width:18ch}
+  .ctaband p{color:#D8E5DB;font-size:19px;margin-top:10px}
+  .ctaband .actions{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer.site{background:var(--black);color:#CFCFCB;padding:64px 0 0}
+  footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.12)}
+  @media(max-width:860px){footer.site .cols{grid-template-columns:1fr 1fr;gap:34px}}
+  @media(max-width:520px){footer.site .cols{grid-template-columns:1fr}}
+  footer .logo .wordmark b{font-size:20px}
+  footer h4{color:#fff;font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 18px;font-weight:700}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  footer ul a{color:#CFCFCB;text-decoration:none;font-size:17px}
+  footer ul a:hover{color:var(--green)}
+  footer .nap{margin-top:20px;font-size:16.5px;line-height:1.7;color:#CFCFCB}
+  footer .nap a{color:#fff;text-decoration:none;font-weight:700}
+  footer .lic-badge{display:inline-flex;align-items:center;gap:10px;background:var(--yellow);color:var(--charcoal);font-weight:800;padding:9px 15px;border-radius:10px;margin-top:18px;font-size:15.5px}
+  footer .lic-badge svg{width:18px;height:18px}
+  footer .legal{display:flex;justify-content:space-between;gap:16px;padding:22px 0;font-size:14.5px;color:#9b9b96;flex-wrap:wrap}
+  footer .legal a{color:#9b9b96}
+
+  .ph-note{font-family:ui-monospace,Menlo,monospace}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site" data-screen-label="Header">
+  <div class="topbar">
+    <div class="wrap">
+      <span><span class="badge-mini">C-10 #1053285</span> · Licensed &amp; Insured</span>
+      <div class="tb-right">
+        <span>Serving Humboldt County since 2015</span>
+        <span>Mon–Fri 7:30am–5:00pm</span>
+      </div>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="wrap">
+      <a class="logo" href="#main" aria-label="Greenbelt Electrical home">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#5CB63B"/></svg>
+        </span>
+        <span class="wordmark"><b>GREENBELT</b><small>ELECTRICAL</small></span>
+      </a>
+      <nav class="main" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#area">Service Area</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="phone-head" href="tel:+17074763720">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          <span class="num"><small>Call now</small>(707) 476-3720</span>
+        </a>
+        <a class="btn btn-primary" href="#contact">Request an Estimate</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer" id="drawer">
+  <div class="scrim" data-close></div>
+  <div class="panel">
+    <button class="closer" data-close aria-label="Close menu">&times;</button>
+    <a class="dlink" href="#services" data-close>Services</a>
+    <a class="dlink" href="#about" data-close>About</a>
+    <a class="dlink" href="#why" data-close>Why Us</a>
+    <a class="dlink" href="#reviews" data-close>Reviews</a>
+    <a class="dlink" href="#area" data-close>Service Area</a>
+    <a class="dlink" href="#contact" data-close>Contact</a>
+    <a class="btn btn-primary" href="#contact" data-close style="margin-top:18px">Request an Estimate</a>
+    <a class="btn btn-ghost" href="tel:+17074763720" style="margin-top:10px">Call (707) 476-3720</a>
+  </div>
+</div>
+
+<main id="main">
+<!-- ===================== HERO ===================== -->
+<section class="hero dark" data-screen-label="Hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Licensed C-10 Electrical Contractor</span>
+      <h1>Licensed electricians Humboldt County <span class="hl">trusts since 2015.</span></h1>
+      <p class="lede">Panel upgrades, EV chargers, and whole-home rewiring — done to code by a local, certified crew that shows up when we say we will.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">Request an Estimate</a>
+        <a class="btn btn-ghost" href="#services">Our Services</a>
+      </div>
+      <div class="hero-trust">
+        <span class="chip lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>C-10 Licensed #1053285</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Insured &amp; bonded</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>Local, family-run</span>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="ph"><span class="ph-label ph-note">[ HERO PHOTO ]<br>electrician at residential panel</span></div>
+      <div class="float-card">
+        <div>
+          <div class="stars">★★★★★</div>
+          <b>4.9</b>
+        </div>
+        <small>from 130+ verified<br>Google reviews</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<section class="truststrip" aria-label="Company highlights">
+  <div class="wrap">
+    <div class="ti"><b>10<span class="u">+</span></b><span>Years serving Humboldt</span></div>
+    <div class="ti"><b>2,400<span class="u">+</span></b><span>Local jobs completed</span></div>
+    <div class="ti"><b>4.9<span class="u">★</span></b><span>Average Google rating</span></div>
+    <div class="ti"><b>100<span class="u">%</span></b><span>Licensed &amp; insured</span></div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="band" id="services" data-screen-label="Services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What we do</span>
+      <h2>Residential &amp; commercial electrical, done right</h2>
+      <p>From a single outlet to a full service upgrade, every job is permitted, inspected, and left clean — with straight answers and upfront pricing.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6M9 10h6M9 14h6M9 18h2"/></svg></div>
+        <h3>Electrical panel upgrades</h3>
+        <p>Replace overloaded or outdated panels with a safe, code-compliant 200-amp service ready for modern electrical loads.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="9" height="12" rx="1.5"/><path d="M6 9V5a3 3 0 0 1 6 0v4M18 11v3a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v-4l-3-3"/></svg></div>
+        <h3>EV charger installation</h3>
+        <p>Level 2 home charging installed correctly the first time — dedicated circuit, proper load calc, and a tidy finish.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c4 0 4 10 8 10s4-10 8-10"/><circle cx="4" cy="7" r="2"/><circle cx="20" cy="17" r="2"/></svg></div>
+        <h3>Whole-home rewiring</h3>
+        <p>Replace old knob-and-tube or aluminum wiring with safe copper — improving safety, capacity, and home value.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2h6c0-.8.4-1.5 1-2A7 7 0 0 0 12 2Z"/></svg></div>
+        <h3>Lighting &amp; outlets</h3>
+        <p>Recessed lighting, added circuits, GFCI outlets, switches, and dimmers — installed cleanly and to code.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
+        <h3>Troubleshooting &amp; repair</h3>
+        <p>Tripping breakers, dead outlets, flickering lights — we diagnose the real cause and fix it safely, fast.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2M12 12v3"/></svg></div>
+        <h3>Generators &amp; backup</h3>
+        <p>Whole-home and battery backup installs so the lights, fridge, and well pump stay on through any outage.</p>
+        <a class="more" href="#contact">Get an estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+    </div>
+    <div class="svc-commercial">
+      <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg></div>
+      <div>
+        <h3>Commercial &amp; facility work</h3>
+        <p>Tenant improvements, lighting retrofits, panel and service work, and ongoing maintenance for property managers, offices, and storefronts across Humboldt County. One licensed crew, scheduled around your business hours.</p>
+      </div>
+      <a class="btn btn-primary" href="#contact">Talk to us</a>
+    </div>
+  </div>
+</section>
+<section class="band" id="why" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" data-screen-label="Why Us">
+  <div class="wrap">
+    <div class="split">
+      <div class="why-media">
+        <div class="ph"><span class="ph-label ph-note">[ TEAM PHOTO ]<br>crew + truck on the job</span></div>
+      </div>
+      <div class="why-copy">
+        <span class="eyebrow">Why Greenbelt</span>
+        <h2 style="font-size:clamp(30px,3.6vw,42px);margin-top:14px">A licensed local you can actually reach</h2>
+        <p style="font-size:20px;color:var(--gray);margin-top:16px">We built Greenbelt to be the electrician our own families would call: certified, dependable, and honest about what your home really needs.</p>
+        <div class="why-list">
+          <div class="why">
+            <div class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div><h3>Fully licensed C-10 &amp; insured</h3><p>California C-10 License #1053285. Every job is permitted and inspected — protecting your home and your warranty.</p></div>
+          </div>
+          <div class="why">
+            <div class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div><h3>Local since 2015</h3><p>Born and based in Humboldt County. We know the homes, the inspectors, and the coastal weather your system has to handle.</p></div>
+          </div>
+          <div class="why">
+            <div class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div><h3>Upfront, written pricing</h3><p>You get a clear quote before we start — no surprise add-ons, no pressure. The price we quote is the price you pay.</p></div>
+          </div>
+          <div class="why">
+            <div class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div><h3>On time, and we clean up</h3><p>We arrive in the window we promise, treat your home with respect, and leave the space cleaner than we found it.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT / STORY ===================== -->
+<section class="band about" id="about" data-screen-label="About">
+  <div class="wrap">
+    <div class="split">
+      <div class="about-copy">
+        <span class="eyebrow">Our story</span>
+        <h2 style="font-size:clamp(30px,3.6vw,42px);margin-top:14px">Built on the North Coast, since 2015</h2>
+        <p class="body">Greenbelt Electrical started with one truck, one licensed electrician, and a simple idea: Humboldt County deserved an electrical contractor that picked up the phone, showed up on time, and did the job by the book.</p>
+        <p class="body">A decade later we're a trusted local team, but the standard hasn't changed. We're a licensed C-10 contractor — every panel upgrade, EV charger, and rewire is permitted, inspected, and backed by our workmanship. We live here too, so your home and our reputation are in the same community.</p>
+        <p class="body">Whether it's a flickering light or a full service upgrade, you'll get the same thing every time: a straight answer, a fair price, and work we're proud to put our name on.</p>
+        <div class="sig">
+          <div class="av" aria-hidden="true">GE</div>
+          <div><b>The Greenbelt Electrical team</b><small>Licensed C-10 #1053285 · Eureka, CA</small></div>
+        </div>
+      </div>
+      <div class="about-media">
+        <div class="ph"><span class="ph-label ph-note">[ OWNER / SHOP PHOTO ]<br>founder or branded truck</span></div>
+        <div class="est-tag"><b>2015</b><small>Est.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVIEWS ===================== -->
+<section class="band reviews" id="reviews" data-screen-label="Reviews">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow" style="justify-content:center">Reviews</span>
+      <h2>Humboldt homeowners recommend us</h2>
+      <p style="margin-left:auto;margin-right:auto">Real feedback from neighbors across the county.</p>
+      <div style="margin-top:22px"><span class="gbadge"><span class="stars">★★★★★</span> 4.9 / 5 on Google · 130+ reviews</span></div>
+    </div>
+    <div class="rev-grid">
+      <article class="rev">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>“They upgraded our old panel to 200-amp and installed our EV charger in a single day. Showed up on time, explained everything, and left the garage spotless. Exactly what you want.”</p>
+        <div class="who"><div class="av">DM</div><div><b>Diane M.</b><small>Eureka · Panel upgrade</small></div></div>
+      </article>
+      <article class="rev">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>“Honest and professional from the first call. The written quote matched the final bill to the dollar. As a property manager I now use Greenbelt for all our units.”</p>
+        <div class="who"><div class="av">RT</div><div><b>Robert T.</b><small>Arcata · Property manager</small></div></div>
+      </article>
+      <article class="rev">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>“We had flickering lights and tripping breakers for months. Greenbelt found the real problem the same afternoon and fixed it safely. Kind, patient, and easy to understand.”</p>
+        <div class="who"><div class="av">CL</div><div><b>Carol L.</b><small>McKinleyville · Repair</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE AREA ===================== -->
+<section class="band area" id="area" data-screen-label="Service Area">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="eyebrow">Where we work</span>
+          <h2>Proudly serving Humboldt County</h2>
+          <p>If you're on the North Coast, you're in our service area. Not sure? Give us a call — we'll let you know right away.</p>
+        </div>
+        <div class="towns">
+          <span><span class="d">●</span>Eureka</span>
+          <span><span class="d">●</span>Arcata</span>
+          <span><span class="d">●</span>McKinleyville</span>
+          <span><span class="d">●</span>Fortuna</span>
+          <span><span class="d">●</span>Ferndale</span>
+          <span><span class="d">●</span>Trinidad</span>
+          <span><span class="d">●</span>Blue Lake</span>
+          <span><span class="d">●</span>Loleta</span>
+          <span><span class="d">●</span>Cutten</span>
+        </div>
+        <a class="btn btn-primary" href="#contact" style="margin-top:30px">Request an Estimate</a>
+      </div>
+      <div class="area-media">
+        <div class="ph"><span class="ph-label ph-note">[ SERVICE-AREA MAP ]<br>Humboldt County coverage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT / ESTIMATE ===================== -->
+<section class="band contact" id="contact" data-screen-label="Contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Get started</span>
+      <h2>Request your free estimate</h2>
+      <p>Call us or send a few details and we'll get right back to you — usually the same business day.</p>
+    </div>
+    <div class="split">
+      <div class="contact-info">
+        <div class="ci-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+          <div><b>Call or text</b><a href="tel:+17074763720">(707) 476-3720</a></div>
+        </div>
+        <div class="ci-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
+          <div><b>Email</b><a href="mailto:office@greenbeltelectrical.com">office@greenbeltelectrical.com</a></div>
+        </div>
+        <div class="ci-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Service area</b><span class="v">1815 B Street, Eureka, CA &amp; all of Humboldt County</span></div>
+        </div>
+        <div class="ci-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div><b>Hours</b><span class="v">Mon–Fri 7:30am–5:00pm</span></div>
+        </div>
+        <div class="ci-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 11 2 2 4-4"/></svg>
+          <div><b>Licensed &amp; insured.</b> California C-10 License #1053285 · Serving Humboldt County since 2015.</div>
+        </div>
+      </div>
+
+      <form class="estimate" id="estimateForm" novalidate>
+        <div id="formBody">
+          <h3>Tell us about your project</h3>
+          <p class="sub">No obligation — just a clear, written estimate.</p>
+          <div class="field row2">
+            <div>
+              <label for="fname">Name <span class="req">*</span></label>
+              <input id="fname" name="name" type="text" autocomplete="name" required>
+              <div class="err">Please enter your name.</div>
+            </div>
+            <div>
+              <label for="fphone">Phone <span class="req">*</span></label>
+              <input id="fphone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+              <div class="err">Please enter a phone number we can reach you at.</div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="femail">Email</label>
+            <input id="femail" name="email" type="email" autocomplete="email">
+            <div class="err">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label for="fservice">What do you need? <span class="req">*</span></label>
+            <select id="fservice" name="service" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Electrical panel upgrade</option>
+              <option>EV charger installation</option>
+              <option>Whole-home rewiring</option>
+              <option>Lighting &amp; outlets</option>
+              <option>Troubleshooting &amp; repair</option>
+              <option>Generator / backup power</option>
+              <option>Something else</option>
+            </select>
+            <div class="err">Please choose a service.</div>
+          </div>
+          <div class="field">
+            <label for="fmsg">Project details</label>
+            <textarea id="fmsg" name="message" placeholder="Tell us a little about your home and what you're looking to do…"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Request My Estimate</button>
+          <p class="form-fine">We'll never share your information. Reply usually within one business day.</p>
+        </div>
+        <div class="form-success" id="formSuccess" role="status">
+          <div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Thanks — we got it!</h3>
+          <p>A Greenbelt electrician will reach out shortly. Need us sooner? Call <a href="tel:+17074763720" style="color:var(--forest);font-weight:700">(707) 476-3720</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BAND ===================== -->
+<section class="ctaband" aria-label="Call to action">
+  <div class="wrap">
+    <div>
+      <h2>Ready for an electrician you can trust?</h2>
+      <p>Licensed, local, and on time — since 2015.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="#contact">Request an Estimate</a>
+      <a class="btn btn-ghost" href="tel:+17074763720">Call (707) 476-3720</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="logo" href="#main" aria-label="Greenbelt Electrical home">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#5CB63B"/></svg></span>
+          <span class="wordmark"><b>GREENBELT</b><small>ELECTRICAL</small></span>
+        </a>
+        <div class="nap">
+          Greenbelt Electrical LLC<br>
+          1815 B Street, Eureka, CA 95503<br>
+          <a href="tel:+17074763720">(707) 476-3720</a> · <a href="mailto:office@greenbeltelectrical.com">office@greenbeltelectrical.com</a>
+        </div>
+        <span class="lic-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>C-10 Licensed &amp; Insured · #1053285</span>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Panel upgrades</a></li>
+          <li><a href="#services">EV chargers</a></li>
+          <li><a href="#services">Whole-home rewiring</a></li>
+          <li><a href="#services">Lighting &amp; outlets</a></li>
+          <li><a href="#services">Repair &amp; troubleshooting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">Our story</a></li>
+          <li><a href="#why">Why Greenbelt</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#area">Service area</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <div class="nap" style="margin-top:0">
+          Mon–Fri 7:30am–5:00pm<br>
+          Serving all of Humboldt County<br><br>
+        </div>
+        <a class="btn btn-primary" href="#contact">Request an Estimate</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="yr"></span> Greenbelt Electrical LLC · CA C-10 #1053285 · All rights reserved.</span>
+      <span style="display:flex;gap:18px"><a href="#" style="text-decoration:none">Privacy</a><a href="#" style="text-decoration:none">Accessibility</a><a href="#" style="text-decoration:none">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Mobile drawer
+  const drawer = document.getElementById('drawer');
+  const menuBtn = document.getElementById('menuBtn');
+  function openDrawer(){drawer.classList.add('open');menuBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function closeDrawer(){drawer.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  menuBtn.addEventListener('click', openDrawer);
+  drawer.addEventListener('click', e=>{ if(e.target.hasAttribute('data-close')) closeDrawer(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+
+  // Form validation
+  const form = document.getElementById('estimateForm');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function setInvalid(field, bad){ field.closest('.field').classList.toggle('invalid', bad); }
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    let ok = true;
+    const name = form.name, phone = form.phone, email = form.email, service = form.service;
+    [['name',!name.value.trim()],['phone',!phone.value.trim()],['service',!service.value]]
+      .forEach(([id,bad])=>{ setInvalid(form[id], bad); if(bad) ok=false; });
+    // email optional but if present must be valid
+    const emailBad = email.value.trim() && !emailRe.test(email.value.trim());
+    setInvalid(email, emailBad); if(emailBad) ok=false;
+    if(!ok){ form.querySelector('.invalid input,.invalid select')?.focus(); return; }
+    document.getElementById('formBody').style.display='none';
+    document.getElementById('formSuccess').classList.add('show');
+    document.getElementById('formSuccess').scrollIntoView({block:'center'});
+  });
+  // clear error on input
+  form.querySelectorAll('input,select').forEach(el=>{
+    el.addEventListener('input', ()=> el.closest('.field').classList.remove('invalid'));
+  });
+</script>
+<!-- Housecall Pro chat bubble -->
+<script id="housecall-pro-chat-bubble" src="https://chat.housecallpro.com/proChat.js" type="text/javascript" data-color="#0E6FBE" data-organization="9b7a48d4-46b8-47f9-94f3-57e8a1525b30" defer></script>
+</body>
+</html>
