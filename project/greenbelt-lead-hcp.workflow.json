@@ -1,0 +1,189 @@
+{
+  "name": "Greenbelt Lead → HCP",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "greenbelt-lead",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "greenbelt-lead"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "first_name",
+              "value": "={{ $json.firstName }}",
+              "type": "string"
+            },
+            {
+              "id": "f2",
+              "name": "last_name",
+              "value": "={{ $json.lastName }}",
+              "type": "string"
+            },
+            {
+              "id": "f3",
+              "name": "mobile_number",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "f4",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "f5",
+              "name": "lead_notes",
+              "value": "={{ $json.service }}{{ $json.message ? ' — ' + $json.message : '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-set",
+      "name": "Map Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.housecallpro.com/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"first_name\": \"{{ $json.first_name }}\",\n  \"last_name\": \"{{ $json.last_name }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"mobile_number\": \"{{ $json.mobile_number }}\",\n  \"lead_source\": \"Website\",\n  \"notifications_enabled\": true\n}",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "node-create-customer",
+      "name": "Create Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hcp-api-key",
+          "name": "HCP API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.housecallpro.com/leads",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"customer_id\": \"{{ $json.id }}\",\n  \"lead_source\": \"Website\",\n  \"notes\": \"{{ $('Map Fields').item.json.lead_notes }}\"\n}",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "node-create-lead",
+      "name": "Create Lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hcp-api-key",
+          "name": "HCP API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@greenbeltelectrical.com",
+        "toEmail": "office@greenbeltelectrical.com",
+        "subject": "=New website lead — {{ $('Map Fields').item.json.first_name }} {{ $('Map Fields').item.json.last_name }}",
+        "text": "=New lead from the website:\n\nName: {{ $('Map Fields').item.json.first_name }} {{ $('Map Fields').item.json.last_name }}\nPhone: {{ $('Map Fields').item.json.mobile_number }}\nEmail: {{ $('Map Fields').item.json.email }}\nService: {{ $('Map Fields').item.json.lead_notes }}\n\nCheck Housecall Pro for details.",
+        "options": {}
+      },
+      "id": "node-notify-email",
+      "name": "Notify Office",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [{ "node": "Map Fields", "type": "main", "index": 0 }]
+      ]
+    },
+    "Map Fields": {
+      "main": [
+        [{ "node": "Create Customer", "type": "main", "index": 0 }]
+      ]
+    },
+    "Create Customer": {
+      "main": [
+        [{ "node": "Create Lead", "type": "main", "index": 0 }]
+      ]
+    },
+    "Create Lead": {
+      "main": [
+        [{ "node": "Notify Office", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": ["greenbelt", "leads", "housecall-pro"],
+  "triggerCount": 1,
+  "updatedAt": "2026-06-13T00:00:00.000Z",
+  "versionId": "1"
+}

@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import LeadForm from '@/components/LeadForm';
+import HcpLeadForm from '@/components/HcpLeadForm';
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -308,7 +308,7 @@ export default function Home() {
                   <div><b>Licensed &amp; insured.</b> California C-10 License #1053285 · Serving Humboldt County since 2015.</div>
                 </div>
               </div>
-              <LeadForm />
+              <HcpLeadForm />
             </div>
           </div>
         </section>
